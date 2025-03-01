@@ -23,6 +23,7 @@ for filepath in filepaths:
     pdf.set_font(family="Times", size=16, style="B")
     pdf.cell(w=50, h=8, txt=f"Date: {date}",ln=1 )
 
+    #header
     df = pd.read_excel(filepath, sheet_name="Sheet 1")
     column = df.columns
     column = [item.replace("_"," ").title() for item in column]
@@ -35,7 +36,7 @@ for filepath in filepaths:
     pdf.cell(w=30, h=8, txt=column[3], border=1)
     pdf.cell(w=30, h=8, txt=column[4], ln=1, border=1)
 
-
+   #table content
     for index,row in df.iterrows():
         pdf.set_font(family="Times", size=8)
         pdf.set_text_color(80,80,80)
@@ -45,6 +46,7 @@ for filepath in filepaths:
         pdf.cell(w=30, h=8, txt=str(row["price_per_unit"]),border=1)
         pdf.cell(w=30, h=8, txt=str(row["total_price"]),ln=1,border=1)
 
+    #sum
     total_sum = df["total_price"].sum()
     pdf.set_font(family="Times", size=8)
     pdf.set_text_color(80, 80, 80)
@@ -58,6 +60,7 @@ for filepath in filepaths:
     pdf.set_text_color(80, 80, 80)
     pdf.cell(w=30, h=8, txt=f"The total sun is {total_sum}",ln=1)
 
+    #copany name and logo
     pdf.set_font(family="Times",size=14 ,style="B")
     pdf.set_text_color(0, 0, 0)
     pdf.cell(w=25, h=8, txt="PythonHow")
